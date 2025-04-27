@@ -1,0 +1,86 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col bg-primary">
+            <nav class="navbar bg-primary navbar-expand-lg" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">SISTEMA WEB</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" href="/">Cadastrar</a>
+                            <a class="nav-link" href="/consulta">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <h5 class="text-start">Cadastrar - Agendamento de Potenciais Clientes</h5>
+            <p class="text-start">Sistema Utilizado para agendamento de serviços.</p>
+        </div>
+    </div>
+
+    <div class="row bg-primary text-light fw-bold">
+        <div class="col">Nome</div>
+        <div class="col">Telefone</div>
+        <div class="col">Origem</div>
+        <div class="col">Data de Contato</div>
+        <div class="col">Observação</div>
+        <div class="col">Ações</div>
+    </div>
+
+    {{#each posts}}
+        {{#dataValues}}
+            <div class="row border-bottom py-2">
+                <div class="col">{{nome}}</div>
+                <div class="col">{{telefone}}</div>
+                <div class="col">{{origem}}</div>
+                <div class="col">{{data_contato}}</div>
+                <div class="col">{{observacao}}</div>
+                <div class="col">
+                    <a href="/atualizar/{{id}}" class="btn btn-primary btn-sm">Atualizar</a>
+                    <form action="/excluir/{{id}}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </div>
+            </div>
+        {{/dataValues}}
+    {{/each}}
+
+    <!-- Modal de Sucesso na Exclusão -->
+    <div class="modal fade" id="modalExclusao" tabindex="-1" aria-labelledby="modalExclusaoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalExclusaoLabel">Sucesso!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Agendamento excluído com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para exibir o modal com base na query string -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("excluido") === "true") {
+            const modal = new bootstrap.Modal(document.getElementById('modalExclusao'));
+            modal.show();
+            const url = new URL(window.location);
+            url.searchParams.delete("excluido");
+            window.history.replaceState({}, document.title, url);
+        }
+    </script>
+</div>

@@ -1,0 +1,65 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-1">&nbsp;</div>
+        <div class="col bg-primary">
+            <nav class="navbar bg-primary navbar-expand-lg" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">SISTEMA WEB</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" href="/">Cadastrar</a>
+                            <a class="nav-link" href="/consulta">Consultar</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="col-1">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-1">&nbsp;</div>
+        <div class="col bg-white">
+            <p class="text-start fs-5">Atualizar - Agendamento de Potenciais Clientes</p>
+            <form action="/atualizar" method="POST">
+                <input type="hidden" name="id" value="{{post.id}}">
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Nome:</label>
+                    <input type="text" name="nome" class="form-control" value="{{post.nome}}" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Telefone:</label>
+                    <input type="number" name="telefone" class="form-control" value="{{post.telefone}}" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Origem:</label>
+                    <select name="origem" class="form-select">
+                        <option value="celular" {{#if (eq post.origem "celular")}}selected{{/if}}>Celular</option>
+                        <option value="whatsapp" {{#if (eq post.origem "whatsapp")}}selected{{/if}}>Whatsapp</option>
+                        <option value="telefone_fixo" {{#if (eq post.origem "telefone_fixo")}}selected{{/if}}>Telefone Fixo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Data do Contato:</label>
+                    <input type="date" name="data_contato" class="form-control" value="{{post.data_contato}}" required>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <label class="form-label">Observação:</label>
+                    <textarea name="observacao" class="form-control" style="height: 100px">{{post.observacao}}</textarea>
+                </div>
+
+                <div class="mb-3 text-start">
+                    <button type="submit" class="btn btn-warning">Atualizar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-1">&nbsp;</div>
+    </div>
+</div>
